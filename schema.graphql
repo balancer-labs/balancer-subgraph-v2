@@ -158,6 +158,8 @@ type PoolToken @entity {
   oldPriceRate: BigDecimal # TODO: make mandatory at next full sync
   priceRate: BigDecimal!
   balance: BigDecimal!
+  volume: BigDecimal!
+  swapFees: BigDecimal!
   paidProtocolFees: BigDecimal # TODO: make mandatory at next full sync
   cashBalance: BigDecimal!
   managedBalance: BigDecimal!
@@ -333,6 +335,26 @@ type PoolSnapshot @entity {
   totalShares: BigDecimal!
   swapVolume: BigDecimal!
   protocolFee: BigDecimal # TODO: make mandatory at next full sync
+  totalSwapFees: [BigDecimal!]!
+  totalSwapVolumes: [BigDecimal!]!
+  totalProtocolFees: [BigDecimal!]!
+  swapFees: BigDecimal!
+  liquidity: BigDecimal!
+  swapsCount: BigInt!
+  holdersCount: BigInt!
+  timestamp: Int!
+}
+
+type PoolSnapshotHourly @entity {
+  id: ID!
+  pool: Pool!
+  amounts: [BigDecimal!]!
+  totalShares: BigDecimal!
+  swapVolume: BigDecimal!
+  protocolFee: BigDecimal # TODO: make mandatory at next full sync
+  totalSwapFees: [BigDecimal!]!
+  totalSwapVolumes: [BigDecimal!]!
+  totalProtocolFees: [BigDecimal!]!
   swapFees: BigDecimal!
   liquidity: BigDecimal!
   swapsCount: BigInt!
