@@ -13,7 +13,6 @@ import {
   BalancerSnapshot,
   Balancer,
   FXOracle,
-  HourlyPoolSnapshot,
   PoolSnapshotHourly,
 } from '../../types/schema';
 import { ERC20 } from '../../types/Vault/ERC20';
