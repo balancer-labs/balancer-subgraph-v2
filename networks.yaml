@@ -686,6 +686,9 @@ optimism:
     startBlock: 97253023
 avalanche:
   network: avalanche
+  graft:
+    block: 50484878
+    base: QmeJY1ZjmuJVPvmVghZSuiSxEx2a9kmpKnjr4Qw5hNdpLU
   EventEmitter:
     address: "0xf04378a3ff97b3f979a46f91f9b2d5A1D2394773"
     startBlock: 33336746
@@ -731,6 +734,9 @@ avalanche:
   FXPoolDeployerTracker:
     address: "0x7ff7B43CEAc9a1163cCB525ac9Dc1dE9A8837b4B"
     startBlock: 43049862
+  GyroEV2PoolFactory:
+    address: "0x41E9ac0bfed353c2dE21a980dA0EbB8A464D946A"
+    startBlock: 50484878
 basegoerli:
   network: base-testnet
   Vault:
