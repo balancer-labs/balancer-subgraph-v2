@@ -850,8 +850,8 @@ base:
 fantom:
   network: fantom
   # graft:
-  #   block: 65629000
-  #   base: QmYsfRRojKnUBbF383mrXh3qE9zyjkwDQqZ4QtPfkijohT
+  #   block: 94751010
+  #   base: QmYN8qV7PEokFeQvhhWMinYD5wsspP1Sc87pGKEvAmjSCJ
   Vault:
     address: "0x20dd72Ed959b6147912C2e529F0a0C651c33c9ce"
     startBlock: 17433594
@@ -933,3 +933,12 @@ fantom:
   MidasLinearPoolFactory:
     address: "0x301F12ec02100e9c7DC1e2423C035590E9d54033"
     startBlock: 60692200
+  Gyro2PoolFactory:
+    address: "0x181636b095BD649c4A0F69f8f1d7917dEC5A114c"
+    startBlock: 94751110
+  Gyro3PoolFactory:
+    address: "0xa39631b02c4d55CA5220B695ce6a071f547629ec"
+    startBlock: 94751110
+  GyroEV2PoolFactory:
+    address: "0xFBc4bE9837Df454D5389D71cA251427ea351058E"
+    startBlock: 94751110
