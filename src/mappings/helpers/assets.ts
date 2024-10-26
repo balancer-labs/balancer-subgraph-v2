@@ -41,6 +41,9 @@ export const assets: Assets = {
     Address.fromString('0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0'), // MATIC
     Address.fromString('0xA13a9247ea42D743238089903570127DdA72fE44'), // bb-a-USD
     Address.fromString('0x60D604890feaa0b5460B28A424407c24fe89374a'), // bb-a-WETH-V3
+    Address.fromString('0x865377367054516e17014CcdED1e7d814EDC9ce4'), // DOLA
+    Address.fromString('0xae78736Cd615f374D3085123A210448E74Fc6393'), // rETH
+    Address.fromString('0xCd5fE23C85820F7B72D0926FC9b05b43E359b7ee'), // weETH
   ],
   fxAssetAggregators: [
     [

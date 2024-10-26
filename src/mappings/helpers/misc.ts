@@ -13,6 +13,7 @@ import {
   BalancerSnapshot,
   Balancer,
   FXOracle,
+  PoolSnapshotHourly,
 } from '../../types/schema';
 import { ERC20 } from '../../types/Vault/ERC20';
 import { WeightedPool } from '../../types/Vault/WeightedPool';
@@ -248,13 +249,24 @@ export function createPoolSnapshot(pool: Pool, timestamp: i32): void {
 
   let tokens = pool.tokensList;
   let amounts = new Array<BigDecimal>(tokens.length);
+  let protocolFees = new Array<BigDecimal>(tokens.length);
+  let volumes = new Array<BigDecimal>(tokens.length);
+  let swapFees = new Array<BigDecimal>(tokens.length);
   for (let i = 0; i < tokens.length; i++) {
     let token = tokens[i];
     let tokenAddress = Address.fromString(token.toHexString());
     let poolToken = loadPoolToken(poolId, tokenAddress);
     if (poolToken == null) continue;
 
+    volumes[i] = poolToken.volume;
     amounts[i] = poolToken.balance;
+    swapFees[i] = poolToken.swapFees;
+
+    if (poolToken.address == pool.address.toHex()) {
+      protocolFees[i] = pool.totalProtocolFeePaidInBPT ? pool.totalProtocolFeePaidInBPT : ZERO_BD;
+    } else {
+      protocolFees[i] = poolToken.paidProtocolFees ? poolToken.paidProtocolFees : ZERO_BD;
+    }
   }
 
   snapshot.pool = poolId;
@@ -264,9 +276,64 @@ export function createPoolSnapshot(pool: Pool, timestamp: i32): void {
   snapshot.swapFees = pool.totalSwapFee;
   snapshot.liquidity = pool.totalLiquidity;
   snapshot.protocolFee = pool.totalProtocolFee;
+  snapshot.totalProtocolFees = protocolFees;
+  snapshot.totalSwapVolumes = volumes;
+  snapshot.totalSwapFees = swapFees;
   snapshot.swapsCount = pool.swapsCount;
   snapshot.holdersCount = pool.holdersCount;
   snapshot.timestamp = dayTimestamp;
+  snapshot.save();
+}
+
+export function createPoolSnapshotHourly(pool: Pool, timestamp: i32): void {
+  const hourIndex = timestamp / 3600; // get unique hour within unix history
+  const hourStartUnix = hourIndex * 3600; // want the rounded effect
+
+  let poolId = pool.id;
+  if (pool == null || !pool.tokensList) return;
+
+  let snapshotId = poolId + '-' + hourIndex.toString();
+  let snapshot = PoolSnapshotHourly.load(snapshotId);
+
+  if (!snapshot) {
+    snapshot = new PoolSnapshotHourly(snapshotId);
+  }
+
+  let tokens = pool.tokensList;
+  let amounts = new Array<BigDecimal>(tokens.length);
+  let protocolFees = new Array<BigDecimal>(tokens.length);
+  let volumes = new Array<BigDecimal>(tokens.length);
+  let swapFees = new Array<BigDecimal>(tokens.length);
+  for (let i = 0; i < tokens.length; i++) {
+    let token = tokens[i];
+    let tokenAddress = Address.fromString(token.toHexString());
+    let poolToken = loadPoolToken(poolId, tokenAddress);
+    if (poolToken == null) continue;
+
+    volumes[i] = poolToken.volume;
+    amounts[i] = poolToken.balance;
+    swapFees[i] = poolToken.swapFees;
+
+    if (poolToken.address == pool.address.toHex()) {
+      protocolFees[i] = pool.totalProtocolFeePaidInBPT ? pool.totalProtocolFeePaidInBPT : ZERO_BD;
+    } else {
+      protocolFees[i] = poolToken.paidProtocolFees ? poolToken.paidProtocolFees : ZERO_BD;
+    }
+  }
+
+  snapshot.pool = poolId;
+  snapshot.amounts = amounts;
+  snapshot.totalShares = pool.totalShares;
+  snapshot.swapVolume = pool.totalSwapVolume;
+  snapshot.swapFees = pool.totalSwapFee;
+  snapshot.liquidity = pool.totalLiquidity;
+  snapshot.protocolFee = pool.totalProtocolFee;
+  snapshot.totalProtocolFees = protocolFees;
+  snapshot.totalSwapVolumes = volumes;
+  snapshot.totalSwapFees = swapFees;
+  snapshot.swapsCount = pool.swapsCount;
+  snapshot.holdersCount = pool.holdersCount;
+  snapshot.timestamp = hourStartUnix;
   snapshot.save();
 }
 

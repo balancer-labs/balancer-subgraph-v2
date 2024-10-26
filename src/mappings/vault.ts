@@ -558,10 +558,14 @@ export function handleSwapEvent(event: SwapEvent): void {
 
   let newInAmount = poolTokenIn.balance.plus(tokenAmountIn);
   poolTokenIn.balance = newInAmount;
+  poolTokenIn.volume = poolTokenIn.volume.plus(tokenAmountIn);
+  poolTokenIn.swapFees = poolTokenIn.swapFees.plus(tokenAmountIn.times(pool.swapFee));
   poolTokenIn.save();
 
   let newOutAmount = poolTokenOut.balance.minus(tokenAmountOut);
   poolTokenOut.balance = newOutAmount;
+  poolTokenOut.volume = poolTokenOut.volume.plus(tokenAmountOut);
+  poolTokenOut.swapFees = poolTokenOut.swapFees.plus(tokenAmountOut.times(pool.swapFee));
   poolTokenOut.save();
 
   let swapId = transactionHash.toHexString().concat(logIndex.toString());

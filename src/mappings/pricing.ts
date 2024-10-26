@@ -12,6 +12,7 @@ import { hasVirtualSupply, isComposableStablePool, isLinearPool, isFXPool, PoolT
 import {
   bytesToAddress,
   createPoolSnapshot,
+  createPoolSnapshotHourly,
   getBalancerSnapshot,
   getToken,
   getTokenPriceId,
@@ -179,8 +180,9 @@ export function updatePoolLiquidity(poolId: string, block_number: BigInt, timest
     updateBptPrice(pool);
   }
 
-  // Create or update pool daily snapshot
+  // Create or update pool snapshots
   createPoolSnapshot(pool, timestamp.toI32());
+  createPoolSnapshotHourly(pool, timestamp.toI32());
 
   // Update global stats
   let vault = Balancer.load('2') as Balancer;

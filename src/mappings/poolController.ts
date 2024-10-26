@@ -55,6 +55,7 @@ import {
   createPoolSnapshot,
   hexToBigInt,
   getBalancerSnapshot,
+  createPoolSnapshotHourly,
 } from './helpers/misc';
 import { ONE_BD, ProtocolFeeType, VAULT_ADDRESS, ZERO_ADDRESS, ZERO_BD } from './helpers/constants';
 import { updateAmpFactor } from './helpers/stable';
@@ -657,6 +658,7 @@ export function handleTransfer(event: Transfer): void {
 
       // create or update pool's snapshot
       createPoolSnapshot(pool, event.block.timestamp.toI32());
+      createPoolSnapshotHourly(pool, event.block.timestamp.toI32());
 
       let vault = Balancer.load('2') as Balancer;
       let vaultProtocolFee = vault.totalProtocolFee ? vault.totalProtocolFee : ZERO_BD;
