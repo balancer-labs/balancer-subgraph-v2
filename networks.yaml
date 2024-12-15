@@ -942,7 +942,6 @@ fantom:
   GyroEV2PoolFactory:
     address: "0xFBc4bE9837Df454D5389D71cA251427ea351058E"
     startBlock: 94751110
-    fantom:
 sonic:
   network: sonic-mainnet
   # graft:
