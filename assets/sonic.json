@@ -1,7 +1,7 @@
 {
   "stableAssets": [
     {
-      "address": "0xb5e6b895734409df411a052195eb4ee7e40d8696",
+      "address": "0x29219dd400f2Bf60E5a23d13Be72B486D4038894",
       "symbol": "USDC"
     }
   ],
@@ -9,6 +9,15 @@
     {
       "address": "0x039e2fB66102314Ce7b64Ce5Ce3E5183bc94aD38",
       "symbol": "WS"
+    },
+    {
+      "address": "0xE5DA20F15420aD15DE0fa650600aFc998bbE3955",
+      "symbol": "STS"
+    },
+    {
+      "address": "0x2D0E0814E62D80056181F5cd932274405966e4f0",
+      "symbol": "BEETS"
     }
+
   ]
 }
