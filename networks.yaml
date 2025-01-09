@@ -943,7 +943,7 @@ fantom:
     address: "0xFBc4bE9837Df454D5389D71cA251427ea351058E"
     startBlock: 94751110
 sonic:
-  network: sonic-mainnet
+  network: sonic
   # graft:
   #   block: 94751010
   #   base: QmYN8qV7PEokFeQvhhWMinYD5wsspP1Sc87pGKEvAmjSCJ
