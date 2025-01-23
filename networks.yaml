@@ -957,5 +957,5 @@ sonic:
     address: "0x993767E29726dDb7F5e8A751fAF54d4b83F3FC62"
     startBlock: 369500
   GyroEV2PoolFactory:
-    address: "0x4a1D66Cb3f33008657D100c38E4Fa158aa0DeFEC"
-    startBlock: 3135170
+    address: "0x5364296D19d453D73f84a94e78681A430e620c5f"
+    startBlock: 5143640
